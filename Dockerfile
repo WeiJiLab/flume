@@ -2,7 +2,7 @@ FROM nginx:alpine
 
 ARG APK_MIRROR_SOURCE_URL
 ARG APK_ORI_SOURCE_URL='dl-cdn.alpinelinux.org'
-ARG DOWNLOAD_SOURCE='http://www.apache.org/dyn/closer.lua/flume'
+ARG DOWNLOAD_SOURCE='https://apache.website-solution.net/flume'
 
 ARG FLUME_VERSION
 
