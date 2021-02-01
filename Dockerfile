@@ -26,7 +26,7 @@ RUN if [ "${APK_MIRROR_SOURCE_URL}" != "" ]; then \
 
 ######################################################################
 # install flume
-RUN curl -v -L "${DOWNLOAD_SOURCE}/${FLUME_VERSION}/apache-flume-${FLUME_VERSION}-bin.tar.gz" --output apache-flume.tar.gz \
+RUN curl -L "${DOWNLOAD_SOURCE}/${FLUME_VERSION}/apache-flume-${FLUME_VERSION}-bin.tar.gz" --output apache-flume.tar.gz \
     && mkdir -p "${FLUME_HOME}" \
     && tar -zxvf /apache-flume.tar.gz -C "${FLUME_HOME}" --strip-components 1 \
     && rm -f /apache-flume.tar.gz \
