@@ -3,6 +3,7 @@ FROM nginx:alpine
 ARG APK_MIRROR_SOURCE_URL
 ARG APK_ORI_SOURCE_URL='dl-cdn.alpinelinux.org'
 ARG DOWNLOAD_SOURCE='https://apache.website-solution.net/flume'
+ARG LOCAL_FLUME_PACKAGE
 
 ARG FLUME_VERSION
 
@@ -17,7 +18,7 @@ RUN if [ "${APK_MIRROR_SOURCE_URL}" != "" ]; then \
         sed -i "s/${APK_ORI_SOURCE_URL}/${APK_MIRROR_SOURCE_URL}/g" /etc/apk/repositories; \
     fi
 
-RUN apk add bash openjdk8=8.252.09-r0 \
+RUN apk add bash openjdk8 \
     && rm -rf /var/cache/apk/*
 
 RUN if [ "${APK_MIRROR_SOURCE_URL}" != "" ]; then \
@@ -26,8 +27,11 @@ RUN if [ "${APK_MIRROR_SOURCE_URL}" != "" ]; then \
 
 ######################################################################
 # install flume
-RUN curl -L "${DOWNLOAD_SOURCE}/${FLUME_VERSION}/apache-flume-${FLUME_VERSION}-bin.tar.gz" --output apache-flume.tar.gz \
-    && mkdir -p "${FLUME_HOME}" \
+COPY ${LOCAL_FLUME_PACKAGE} apache-flume.tar.gz
+RUN if [ "${LOCAL_FLUME_PACKAGE}" == "" ]; then \
+        curl -L "${DOWNLOAD_SOURCE}/${FLUME_VERSION}/apache-flume-${FLUME_VERSION}-bin.tar.gz" --output apache-flume.tar.gz; \
+    fi
+RUN mkdir -p "${FLUME_HOME}" \
     && tar -zxvf /apache-flume.tar.gz -C "${FLUME_HOME}" --strip-components 1 \
     && rm -f /apache-flume.tar.gz \
     && mkdir -p /opt/flume/sbin \
