@@ -5,7 +5,7 @@
 |Arg Name|MUST Provided|Description|
 |---|:---:|---|
 |APK_MIRROR_SOURCE_URL|no|apk registry mirror domain. example: official registry is 'dl-cdn.alpinelinux.org'. If not provided. official registry will be used|
-|DOWNLOAD_SOURCE|no|flume download site prefix before version segement. example: official site is 'http://www.apache.org/dyn/closer.lua/flume'. If not provided, official site will be used|
+|DOWNLOAD_SOURCE|no|flume download site prefix before version segement. example: official site is 'https://apache.website-solution.net/flume'. If not provided, official site will be used|
 |FLUME_VERSION|yes|flume version string. example: '1.9.0'.|
 
 ## Volumes
